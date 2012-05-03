@@ -26,7 +26,7 @@ var sdSyslogParser = function(msg) {
   for (entry in entries) {
     console.log(entries[entry]);
     if (!!entries[entry].split("\"")[1]) {
-      console.log(console[entry].split("\"")[1]);
+      console.log(entries[entry].split("\"")[1]);
     };
   };
   //return object;
