@@ -18,7 +18,7 @@ server.bind(listenPort);
 
 var sdSyslogParser = function(msg) {
   var patt = '.* - ([\w_]*)\s\[([\w\@\.]+) reason=\"([\w\s\.\-\/]+)\" source-address=\"([\w\s\.\-\/]+)\" source-port=\"([\w\s\.\-\/]+)\" destination-address=\"([\w\s\.\-\/]+)\" destination-port=\"([\w\s\.\-\/]+)\" service-name=\"([\w\s\.\-\/]+)\" nat-source-address=\"([\w\s\.\-\/]+)\" nat-source-port=\"([\w\s\.\-\/]+)\" nat-destination-address=\"([\w\s\.\-\/]+)\" nat-destination-port=\"([\w\s\.\-\/]+)\" src-nat-rule-name=\"([\w\s\.\-\/]+)\" dst-nat-rule-name=\"([\w\s\.\-\/]+)\" protocol-id=\"([\w\s\.\-\/]+)\" policy-name=\"([\w\s\.\-\/]+)\" source-zone-name=\"([\w\s\.\-\/]+)\" destination-zone-name=\"([\w\s\.\-\/]+)\" session-id-32=\"([\w\s\.\-\/]+)\" packets-from-client=\"([\w\s\.\-\/]+)\" bytes-from-client=\"([\w\s\.\-\/]+)\" packets-from-server=\"([\w\s\.\-\/]+)\" bytes-from-server=\"([\w\s\.\-\/]+)\" elapsed-time=\"([\w\s\.\-\/]+)\" application=\"([\w\s\.\-\/]+)\" nested-application=\"([\w\s\.\-\/]+)\" username=\"([\w\s\.\-\/]+)\" roles=\"([\w\s\.\-\/]+)\" packet-incoming-interface=\"([\w\s\.\-\/]+)\" encrypted=\"([\w\s\.\-\/]+)"\]';
-  var logArray = new RegExp(patt,mod);
+  var logArray = new RegExp(patt);
   console.log(logArray[6])
   return object;
 };
