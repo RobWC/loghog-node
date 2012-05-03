@@ -26,8 +26,7 @@ var sdSyslogParser = function(msg) {
       console.log(entry.split("\"")[1]);
     };
   };
-  console.log(logArray[6]);
-  return object;
+  //return object;
 };
 
 /*
