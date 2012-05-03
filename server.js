@@ -9,8 +9,7 @@ server.on("message", function (msg, rinfo) {
 
 server.on("listening", function () {
   var address = server.address();
-  console.log("server listening " +
-      address.address + ":" + address.port);
+  console.log("server listening " + address.address + ":" + address.port);
 });
 
 server.bind(listenPort);
@@ -26,7 +25,12 @@ var sdSyslogParser = function(msg) {
   for (entry in entries) {
     console.log(entries[entry] + ' ' + entry);
     if (!!entries[entry].split("\"")[1]) {
-      console.log(entries[entry].split("\"")[1]);
+      //console.log(entries[entry].split("\"")[1]);
+      switch(entries[entry].split("\"")[0]) {
+        case 'source-address=':
+          console.log('SRC');
+          break;
+      }
     };
   };
   //return object;
