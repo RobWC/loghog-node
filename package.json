@@ -1,0 +1,9 @@
+{
+  "name": "loghog-node",
+  "version": "0.0.1",
+  "author": "Rob Cameron <rwcameron@gmail.com>",
+  "repository": {
+    "type":"git",
+    "url":"https://RobWC@github.com/RobWC/loghog-node.git"
+  }
+}
