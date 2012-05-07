@@ -29,41 +29,87 @@ var sdSyslogParser = function(msg) {
       var field = entries[entry].split("\"")[0];
       var value = entries[entry].split("\"")[1];
       switch(field) {
-        case 'source-address=':
+        case 'source-address='://
           console.log(value);
-        case 'source-port=':
-              console.log(value);
-        case 'destination-address=':
-        case 'destination-port=':
-        case 'service-name=':
-        case 'nat-souce-address=':
-        case 'nat-source-port=':
-        case 'nat-destination-address=':
-        case 'nat-destination-port=':
-        case 'src-nat-rule-name=':
-        case 'dst-nat-rule-name=':
-        case 'protocol-id=':
+        case 'source-port='://
+          console.log(value);
+        case 'destination-address='://
+        case 'destination-port='://
+        case 'service-name='://
+        case 'nat-souce-address='://
+        case 'nat-source-port='://
+        case 'nat-destination-address='://
+        case 'nat-destination-port='://
+        case 'src-nat-rule-name='://
+        case 'dst-nat-rule-name='://
+        case 'protocol-id='://
         case 'policy-name=':
-        case 'source-zone-name=':
-        case 'destination-zone-name=':
-        case 'session-id-32=':
-        case 'packets-from-client=':
-        case 'bytes-from-client=':
-        case 'packets-from-server=':
-        case 'bytes-from-server=':
+        case 'source-zone-name='://
+        case 'destination-zone-name='://
+        case 'session-id-32='://
+        case 'packets-from-client='://
+        case 'bytes-from-client='://
+        case 'packets-from-server='://
+        case 'bytes-from-server='://
         case 'elapsed-time=':
-        case 'application=':
-        case 'nested-application=':
-        case 'username=':
-        case 'roles=':
+        case 'application='://
+        case 'nested-application='://
+        case 'username='://
+        case 'roles='://
         case 'packet-incoming-interface=':
-        case 'encrypted=':
+        case 'encrypted='://
         default:
-          console.log('ignored')
+          console.log('')
       }
     };
   };
   //return object;
+};
+
+var logObject = function() {
+  this.sessionID = '';
+  this.policyID = '';
+  this.protocol = {
+    serviceName: '',
+    application: '',
+    nestedApplication: '',
+    encrypted: '',
+    id:''
+  }
+  this.source = {
+    address: '',
+    port: '',
+    zone: '',
+    packets:'',
+    bytes: '',
+    nat: {
+      address: '',
+      port: '',
+      ruleName: ''
+    }
+  }
+  this.destination = {
+    address:'',
+    port: '',
+    zone: '',
+    packets: '',
+    bytes: '',
+    nat: {
+      address: '',
+      port: '',
+      ruleName: ''
+    }
+  }
+  this.user = {
+    name: '',
+    roles: ''
+  }
+};
+
+logObject.constructor = logObject;
+
+logObject.prototype = {
+  
 };
 
 /*
