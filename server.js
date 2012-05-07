@@ -20,6 +20,11 @@ var sdSyslogParser = function(msg) {
   var string = msg.toString('utf8');
   //console.log(string);
   var entries = string.split(" ");
+  logObj.log.host = entries[2];
+  logObj.log.type = entries[3];
+  logObj.log.subType = entries[5];
+  logObj.session.closeReason = /reason=\"([\w\s]+)\"/.exec(msg)[1];
+  //logObj.session.closeReason = entries[7].split("\"")
   for (entry in entries) {
     var field = entries[entry].split("\"")[0];
     var value = entries[entry].split("\"")[1];
@@ -116,10 +121,16 @@ var sdSyslogParser = function(msg) {
 };
 
 var LogObject = function() {
+  this.log = {
+    host: '',
+    type: '',
+    subType: ''
+  }
   this.session = {
     id: '',
     elapsedTime: '',
-    ingressInt: ''
+    ingressInt: '',
+    closeReason: ''
   }
   this.policy = {
     name: ''
