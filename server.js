@@ -37,6 +37,7 @@ var sdSyslogParser = function(msg) {
           break;
         case 'destination-address=':
           logObj.destination.address = value;
+          break;
         case 'destination-port=':
           logObj.destination.port = value;
           break;
@@ -55,24 +56,60 @@ var sdSyslogParser = function(msg) {
         case 'nat-destination-port=':
           logObj.destination.nat.port = value;
           break;
-        case 'src-nat-rule-name='://
-        case 'dst-nat-rule-name='://
-        case 'protocol-id='://
+        case 'src-nat-rule-name=':
+          logObj.source.nat.ruleName = value;
+          break;
+        case 'dst-nat-rule-name=':
+          logObj.destination.nat.ruleName = value;
+          break;
+        case 'protocol-id=':
+          logObj.protocol.id = value;
+          break;
         case 'policy-name=':
-        case 'source-zone-name='://
-        case 'destination-zone-name='://
-        case 'session-id-32='://
-        case 'packets-from-client='://
-        case 'bytes-from-client='://
-        case 'packets-from-server='://
-        case 'bytes-from-server='://
+          logObj.policy.name = value;
+          break;
+        case 'source-zone-name=':
+          logObj.source.zone = value;
+          break;
+        case 'destination-zone-name=':
+          logObj.destination.zone = value;
+          break;
+        case 'session-id-32=':
+          logObj.session.id = value;
+          break;
+        case 'packets-from-client=':
+          logObj.source.packets = value;
+          break;
+        case 'bytes-from-client=':
+          logObj.source.bytes = value;
+          break;
+        case 'packets-from-server=':
+          logObj.destination.packets = value;
+          break;
+        case 'bytes-from-server=':
+          logObj.destination.bytes = value;
+          break;
         case 'elapsed-time=':
-        case 'application='://
-        case 'nested-application='://
-        case 'username='://
-        case 'roles='://
+          logObj.session.elapsedTime = value;
+          break;
+        case 'application=':
+          logObj.protocol.application = value;
+          break;
+        case 'nested-application=':
+          logObj.protocol.nestedApplication = value;
+          break;
+        case 'username=':
+          logObj.user.username = value;
+          break;
+        case 'roles=':
+          logObj.user.roles = value;
+          break;
         case 'packet-incoming-interface=':
-        case 'encrypted='://
+          logObj.session.ingressInt = value;
+          break;
+        case 'encrypted=':
+          logObj.protocol.encrypted = value;
+          break;
         default:
           //console.log('')
       }
@@ -83,9 +120,15 @@ var sdSyslogParser = function(msg) {
 };
 
 var LogObject = function() {
-  this.sessionID = '';
-  this.policyID = '';
-  this.elapsedTime = '';
+  this.session = {
+    id: '',
+    elapsedTime: '',
+    ingressInt: ''
+  }
+  this.policy = {
+    name: '',
+    id: ''
+  }
   this.protocol = {
     serviceName: '',
     application: '',
@@ -118,7 +161,7 @@ var LogObject = function() {
     }
   }
   this.user = {
-    name: '',
+    username: '',
     roles: ''
   }
 };
