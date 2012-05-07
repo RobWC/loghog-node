@@ -36,7 +36,7 @@ var sdSyslogParser = function(msg) {
         case 'destination-address='://
         case 'destination-port='://
         case 'service-name='://
-        case 'nat-souce-address='://
+        case 'nat-source-address='://
           console.log('NAT');
         case 'nat-source-port='://
         case 'nat-destination-address='://
@@ -60,7 +60,7 @@ var sdSyslogParser = function(msg) {
         case 'packet-incoming-interface=':
         case 'encrypted='://
         default:
-          console.log('')
+          //console.log('')
       }
     };
   };
