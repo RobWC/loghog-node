@@ -37,6 +37,7 @@ var sdSyslogParser = function(msg) {
         case 'destination-port='://
         case 'service-name='://
         case 'nat-souce-address='://
+          console.log('NAT');
         case 'nat-source-port='://
         case 'nat-destination-address='://
         case 'nat-destination-port='://
@@ -69,6 +70,7 @@ var sdSyslogParser = function(msg) {
 var logObject = function() {
   this.sessionID = '';
   this.policyID = '';
+  this.elapsedTime = '';
   this.protocol = {
     serviceName: '',
     application: '',
