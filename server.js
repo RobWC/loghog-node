@@ -123,7 +123,7 @@ var LogObject = function() {
   }
 };
 
-LogObject.constructor = logObject;
+LogObject.constructor = LogObject;
 
 LogObject.prototype = {
   
