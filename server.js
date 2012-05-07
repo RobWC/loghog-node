@@ -19,6 +19,7 @@ var sdSyslogParser = function(msg) {
   //var test = '<14>1 2012-05-02T20:41:10.805 SRXEdge RT_FLOW - RT_FLOW_SESSION_CLOSE [junos@2636.1.1.1.2.41 reason="unset" source-address="10.0.1.24" source-port="54895" destination-address="75.75.75.75" destination-port="53" service-name="junos-dns-udp" nat-source-address="50.76.52.162" nat-source-port="24181" nat-destination-address="75.75.75.75" nat-destination-port="53" src-nat-rule-name="1" dst-nat-rule-name="None" protocol-id="17" policy-name="1" source-zone-name="Trust" destination-zone-name="Untrust" session-id-32="926" packets-from-client="1" bytes-from-client="80" packets-from-server="1" bytes-from-server="128" elapsed-time="2" application="UNKNOWN" nested-application="UNKNOWN" username="N/A" roles="N/A" packet-incoming-interface="vlan.0" encrypted="No "]';
   //var rtLogCloseRegex = new RegExp("^.* - ([\w_]*) \W([\w\@\.]+) reason=\"([\w\s\.\-\/]+)\" source-address=\"([\w\s\.\-\/]+)\" source-port=\"([\w\s\.\-\/]+)\" destination-address=\"([\w\s\.\-\/]+)\" destination-port=\"([\w\s\.\-\/]+)\" service-name=\"([\w\s\.\-\/]+)\" nat-source-address=\"([\w\s\.\-\/]+)\" nat-source-port=\"([\w\s\.\-\/]+)\" nat-destination-address=\"([\w\s\.\-\/]+)\" nat-destination-port=\"([\w\s\.\-\/]+)\" src-nat-rule-name=\"([\w\s\.\-\/]+)\" dst-nat-rule-name=\"([\w\s\.\-\/]+)\" protocol-id=\"([\w\s\.\-\/]+)\" policy-name=\"([\w\s\.\-\/]+)\" source-zone-name=\"([\w\s\.\-\/]+)\" destination-zone-name=\"([\w\s\.\-\/]+)\" session-id-32=\"([\w\s\.\-\/]+)\" packets-from-client=\"([\w\s\.\-\/]+)\" bytes-from-client=\"([\w\s\.\-\/]+)\" packets-from-server=\"([\w\s\.\-\/]+)\" bytes-from-server=\"([\w\s\.\-\/]+)\" elapsed-time=\"([\w\s\.\-\/]+)\" application=\"([\w\s\.\-\/]+)\" nested-application=\"([\w\s\.\-\/]+)\" username=\"([\w\s\.\-\/]+)\" roles=\"([\w\s\.\-\/]+)\" packet-incoming-interface=\"([\w\s\.\-\/]+)\" encrypted=\"([\w\s\.\-\/]+)\"\W");
   //var logArray = rtLogCloseRegex.exec(test);
+  var logObj = new LogObject();
   var string = msg.toString('utf8');
   //console.log(string);
   var entries = string.split(" ");
@@ -28,21 +29,32 @@ var sdSyslogParser = function(msg) {
     if (!!value) {
       console.log(field);
       switch(field) {
-        case 'source-address='://
-          console.log(value);
+        case 'source-address=':
+          logObj.source.address = value;
           break;
-        case 'source-port='://
-          console.log(value);
+        case 'source-port=':
+          logObj.source.port = value;
           break;
-        case 'destination-address='://
-        case 'destination-port='://
-        case 'service-name='://
-        case 'nat-source-address='://
-          console.log('NAT');
+        case 'destination-address=':
+          logObj.destination.address = value;
+        case 'destination-port=':
+          logObj.destination.port = value;
           break;
-        case 'nat-source-port='://
-        case 'nat-destination-address='://
-        case 'nat-destination-port='://
+        case 'service-name=':
+          logObj.protocol.serviceName = value;
+          break;
+        case 'nat-source-address=':
+          logObj.source.nat.address = value;
+          break;
+        case 'nat-source-port=':
+          logObj.source.nat.port = value;
+          break;
+        case 'nat-destination-address=':
+          logObj.destination.address = value;
+          break;
+        case 'nat-destination-port=':
+          logObj.destination.nat.port = value;
+          break;
         case 'src-nat-rule-name='://
         case 'dst-nat-rule-name='://
         case 'protocol-id='://
@@ -66,10 +78,11 @@ var sdSyslogParser = function(msg) {
       }
     };
   };
+  console.log(logObj);
   //return object;
 };
 
-var logObject = function() {
+var LogObject = function() {
   this.sessionID = '';
   this.policyID = '';
   this.elapsedTime = '';
@@ -110,9 +123,9 @@ var logObject = function() {
   }
 };
 
-logObject.constructor = logObject;
+LogObject.constructor = logObject;
 
-logObject.prototype = {
+LogObject.prototype = {
   
 };
 
