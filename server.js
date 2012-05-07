@@ -24,10 +24,10 @@ var sdSyslogParser = function(msg) {
   var entries = string.split(" ");
   for (entry in entries) {
     //console.log(entries[entry] + ' ' + entry);
-    if (!!entries[entry].split("\"")[1]) {
-      //console.log(entries[entry].split("\"")[1]);
-      var field = entries[entry].split("\"")[0];
-      var value = entries[entry].split("\"")[1];
+    var field = entries[entry].split("\"")[0];
+    var value = entries[entry].split("\"")[1];
+    if (!!value) {
+      console.log(field);
       switch(field) {
         case 'source-address='://
           console.log(value);
