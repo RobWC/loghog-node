@@ -23,7 +23,6 @@ var sdSyslogParser = function(msg) {
   //console.log(string);
   var entries = string.split(" ");
   for (entry in entries) {
-    //console.log(entries[entry] + ' ' + entry);
     var field = entries[entry].split("\"")[0];
     var value = entries[entry].split("\"")[1];
     if (!!value) {
@@ -31,13 +30,16 @@ var sdSyslogParser = function(msg) {
       switch(field) {
         case 'source-address='://
           console.log(value);
+          break;
         case 'source-port='://
           console.log(value);
+          break;
         case 'destination-address='://
         case 'destination-port='://
         case 'service-name='://
         case 'nat-source-address='://
           console.log('NAT');
+          break;
         case 'nat-source-port='://
         case 'nat-destination-address='://
         case 'nat-destination-port='://
