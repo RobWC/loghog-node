@@ -16,7 +16,7 @@ server.bind(listenPort);
 
 
 var sdSyslogParser = function(msg) {
-  var logObj = new LogObject();
+  var logObj = new LogObject(msg);
   var string = msg.toString('utf8');
   //console.log(string);
   var entries = string.split(" ");
@@ -120,7 +120,8 @@ var sdSyslogParser = function(msg) {
   //return object;
 };
 
-var LogObject = function() {
+var LogObject = function(msg) {
+  this.message = msg;
   this.log = {
     host: '',
     type: '',
