@@ -1,4 +1,9 @@
 var dgram = require("dgram");
+var Db = require("mongodb").Db,
+    Connection = require("mongodb").Connection.
+    Server = require("mongodb").Server
+var db = new Db('logger', new Server('localhost', 27017, {}), {native_parser:true});
+
 var listenPort = 1234;
 
 var server = dgram.createSocket("udp4");
@@ -182,6 +187,18 @@ LogObject.constructor = LogObject;
 
 LogObject.prototype = {
   saveToMongo: function() {
-    
+    var self = this;
+    db.open(function(err,result){
+      db.collection('logs', function(err,collection){
+        collection.insert(self,function(err,docs){
+          if (err) {
+            console.log(err);
+          } else {
+            console.log('insert');
+            db.close();
+          };
+        });
+      });
+    });
   }
 };
