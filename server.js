@@ -127,7 +127,7 @@ var sdSyslogParser = function(msg) {
     };
   };
   console.log(logObj);
-  if (logArray.length == 100) {
+  if (logArray.length == 5) {
     
     for(var i = logArray.length; i = 0; i--) {
       var log = logArray.pop();
