@@ -126,6 +126,7 @@ var sdSyslogParser = function(msg) {
     };
   };
   console.log(logObj);
+  logObj.saveToMongo();
   //return object;
 };
 
