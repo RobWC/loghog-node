@@ -16,9 +16,9 @@ server.bind(listenPort);
 
 
 var sdSyslogParser = function(msg) {
-  var logObj = new LogObject(msg);
   var string = msg.toString('utf8');
   console.log(string);
+  var logObj = new LogObject(string);
   var entries = string.split(" ");
   logObj.log.host = entries[2];
   logObj.log.type = entries[3];
