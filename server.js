@@ -19,6 +19,7 @@ var sdSyslogParser = function(msg) {
   var string = msg.toString('utf8');
   var logObj = new LogObject(string);
   var entries = string.split(" ");
+  logObj.log.datetime = entries[1];
   logObj.log.host = entries[2];
   logObj.log.type = entries[3];
   logObj.log.subType = entries[5];
@@ -128,7 +129,8 @@ var LogObject = function(msg) {
   this.log = {
     host: '',
     type: '',
-    subType: ''
+    subType: '',
+    datetime: ''
   }
   this.session = {
     id: '',
@@ -179,5 +181,5 @@ var LogObject = function(msg) {
 LogObject.constructor = LogObject;
 
 LogObject.prototype = {
-  
+  saveToMongo:
 };
