@@ -2,7 +2,6 @@ var dgram = require("dgram");
 var Db = require("mongodb").Db;
 var Connection = require("mongodb").Connection;
 var Server = require("mongodb").Server;
-var db = new Db('logger', new Server('localhost', 27017, {}));
 var logArray = new Array();
 
 var listenPort = 1234;
@@ -126,7 +125,6 @@ var sdSyslogParser = function(msg) {
       }
     };
   };
-  console.log(logObj);
   logObj.saveToMongo();
   //return object;
 };
@@ -190,13 +188,13 @@ LogObject.constructor = LogObject;
 LogObject.prototype = {
   saveToMongo: function() {
     var self = this;
+    var db = new Db('logger', new Server('localhost', 27017, {}));
     db.open(function(err,result){
       db.collection('logs', function(err,collection){
         collection.insert(self,function(err,docs){
           if (err) {
             console.log(err);
           } else {
-            console.log('insert');
             db.close();
           };
         });
