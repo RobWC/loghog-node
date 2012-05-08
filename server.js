@@ -3,6 +3,7 @@ var Db = require("mongodb").Db;
 var Connection = require("mongodb").Connection;
 var Server = require("mongodb").Server;
 var db = new Db('logger', new Server('localhost', 27017, {}));
+var logArray = new Array();
 
 var listenPort = 1234;
 
@@ -126,7 +127,18 @@ var sdSyslogParser = function(msg) {
     };
   };
   console.log(logObj);
-  logObj.saveToMongo();
+  if (logArray.length == 100) {
+    
+    for(var i = logArray.length; i = 0; i--) {
+      var log = logArray.pop();
+      log.saveToMongo();
+    };
+    for (log in logArray) {
+      logArray[log]
+    };
+  } else {
+    logArray.push(logObj);
+  }
   //return object;
 };
 
