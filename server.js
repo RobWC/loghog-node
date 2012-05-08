@@ -181,5 +181,7 @@ var LogObject = function(msg) {
 LogObject.constructor = LogObject;
 
 LogObject.prototype = {
-  saveToMongo:
+  saveToMongo: function() {
+    
+  }
 };
