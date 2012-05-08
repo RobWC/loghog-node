@@ -23,7 +23,7 @@ var sdSyslogParser = function(msg) {
   logObj.log.host = entries[2];
   logObj.log.type = entries[3];
   logObj.log.subType = entries[5];
-  logObj.session.closeReason = /reason=\"([\w\s]+)\"/.exec(msg)[1];
+  logObj.session.closeReason = /reason=\"([\w\s]+)\"/.exec(string)[1];
   for (entry in entries) {
     var field = entries[entry].split("\"")[0];
     var value = entries[entry].split("\"")[1];
