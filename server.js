@@ -55,7 +55,7 @@ var sdSyslogParser = function(msg) {
           logObj.source.nat.port = value;
           break;
         case 'nat-destination-address=':
-          logObj.destination.address = value;
+          logObj.destination.nat.address = value;
           break;
         case 'nat-destination-port=':
           logObj.destination.nat.port = value;
