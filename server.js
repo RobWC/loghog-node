@@ -1,7 +1,4 @@
 var dgram = require("dgram");
-var Db = require("mongodb").Db;
-var Connection = require("mongodb").Connection;
-var Server = require("mongodb").Server;
 
 //
 var parsers = require('./parsers.js')

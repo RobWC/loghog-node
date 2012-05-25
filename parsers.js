@@ -1,3 +1,7 @@
+var Db = require("mongodb").Db;
+var Connection = require("mongodb").Connection;
+var Server = require("mongodb").Server;
+
 var RTFlowLogObject = function(msg) {
   this.message = msg;
   this.log = {
