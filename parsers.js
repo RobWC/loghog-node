@@ -61,7 +61,7 @@ RTFlowLogObject.prototype = {
     this.log.host = entries[2];
     this.log.type = entries[3];
     this.log.subType = entries[5];
-    var reasonArray = /reason=\"([\w\s]+)\"/.exec(message);
+    var reasonArray = /reason=\"([\w\s]+)\"/.exec(this.message);
     if ( !! reasonArray) {
       this.session.closeReason = reasonArray[1];
     } else {
