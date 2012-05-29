@@ -10,7 +10,7 @@ var mapFunc = function() {
     if (ipnum >= 167772160 && ipnum <= 184549375) {
      //10.x.x.x ignore
     } else {
-     emit({'source': sourceAddress},{'count':1});
+     emit({'source': sourceAddress},1);
     }
   }
 };
@@ -18,10 +18,10 @@ var mapFunc = function() {
 var reduceFunc = function(key,values) {
   var count = 0;
   values.forEach(function(v){
-    count += v['count'];
+    count += v;
   });
   
-  return {count: count};
+  return count;
 };
 
 var db = new Db('logger', new Server('localhost', 27017, {}), {native_parser:true});
