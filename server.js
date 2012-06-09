@@ -27,9 +27,10 @@ var sdSyslogParser = function(msg) {
       subType = fields[5];
   if (type == 'RT_FLOW') {
     var log = new parsers.RTFlowLogObject(string);
-    log.parseLog()
+    log.parseLog();
   } else if (type == 'RT_IDP') {
-
+    var log = new parsers.RTIDPLogObject(string);
+    log.parseLog();
   };
   //return object;
 };
