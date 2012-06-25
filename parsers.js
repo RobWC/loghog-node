@@ -61,7 +61,7 @@ exports.RTFlowLogObject = RTFlowLogObject;
 RTFlowLogObject.prototype = {
   parseLog: function() {
     var entries = this.message.split(" ");
-    this.log.datetime = entries[1];
+    this.log.datetime = new Date(entries[1]);
     this.log.host = entries[2];
     this.log.type = entries[3];
     this.log.subType = entries[5];
@@ -245,7 +245,7 @@ exports.RTIDPLogObject = RTIDPLogObject;
 RTIDPLogObject.prototype = {
   parseLog: function() {
     var entries = this.message.split(" ");
-    this.log.datetime = entries[1];
+    this.log.datetime = new Date(entries[1]);
     this.log.host = entries[2];
     this.log.type = entries[3];
     this.log.subType = entries[5];
