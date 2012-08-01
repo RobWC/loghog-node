@@ -168,7 +168,7 @@ RTFlowLogObject.prototype = {
         }
       };
     };
-    self.emit('newLog', {log:self});
+    self.emit('newLog', {'log':self});
     //this.saveToMongo();
   }
 };
@@ -240,6 +240,8 @@ exports.RTIDPLogObject = RTIDPLogObject;
 
 RTIDPLogObject.prototype = {
   parseLog: function() {
+    var self = this;
+    
     var entries = this.message.split(" ");
     this.log.datetime = new Date(entries[1]);
     this.log.host = entries[2];
@@ -352,6 +354,6 @@ RTIDPLogObject.prototype = {
       };
     };
     //this.saveToMongo();
-    self.emit('newLog', {log:self});
+    self.emit('newLog', {'log':self});
   }
 };
