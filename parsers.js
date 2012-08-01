@@ -1,8 +1,10 @@
-var Db = require("mongodb").Db;
-var Connection = require("mongodb").Connection;
-var Server = require("mongodb").Server;
+var util = require('util');
+var events = require('events');
+//third party
 
 var RTFlowLogObject = function(msg) {
+  events.EventEmitter.call(this);
+  
   this.message = msg;
   this.log = {
     host: '',
@@ -56,10 +58,14 @@ var RTFlowLogObject = function(msg) {
   }
 };
 
+util.inherits(RTFlowLogObject,events.EventEmitter);
+
 exports.RTFlowLogObject = RTFlowLogObject;
 
 RTFlowLogObject.prototype = {
   parseLog: function() {
+    var self = this;
+    
     var entries = this.message.split(" ");
     this.log.datetime = new Date(entries[1]);
     this.log.host = entries[2];
@@ -162,7 +168,8 @@ RTFlowLogObject.prototype = {
         }
       };
     };
-    this.saveToMongo();
+    self.emit('newLog', {log:self});
+    //this.saveToMongo();
   },
   saveToMongo: function() {
     var self = this;
@@ -182,6 +189,8 @@ RTFlowLogObject.prototype = {
 };
 
 var RTIDPLogObject = function(msg) {
+  events.EventEmitter.call(this);
+
   this.message = msg;
   this.log = {
     host: '',
@@ -239,6 +248,8 @@ var RTIDPLogObject = function(msg) {
     }
   }
 };
+
+util.inherits(RTIDPLogObject,events.EventEmitter);
 
 exports.RTIDPLogObject = RTIDPLogObject;
 
@@ -355,7 +366,8 @@ RTIDPLogObject.prototype = {
         }
       };
     };
-    this.saveToMongo();
+    //this.saveToMongo();
+    self.emit('newLog', {log:self});
   },
   saveToMongo: function() {
     var self = this;

@@ -1,14 +1,17 @@
 var dgram = require("dgram");
-
 //
-var parsers = require('./parsers.js')
+var Db = require("mongodb").Db;
+var Connection = require("mongodb").Connection;
+var Server = require("mongodb").Server;
 
+var logParser = new require('./logparser.js').LogParser();
+ var db = new Db('logger', new Server('localhost', 27017, {}));
 var listenPort = 1234;
 
 var server = dgram.createSocket("udp4");
 
 server.on("message", function(msg, rinfo) {
-  sdSyslogParser(msg);
+  logParser.parse(msg);
 });
 
 server.on("listening", function() {
@@ -16,21 +19,15 @@ server.on("listening", function() {
   console.log("server listening " + address.address + ":" + address.port);
 });
 
-server.bind(listenPort);
+db.open(function(err, result) {
 
-var sdSyslogParser = function(msg) {
-  var string = msg.toString('utf8');
-  var fields = string.split(" ");
-  var datetime = fields[1],
-      host = fields[2],
-      type = fields[3],
-      subType = fields[5];
-  if (type == 'RT_FLOW') {
-    var log = new parsers.RTFlowLogObject(string);
-    log.parseLog();
-  } else if (type == 'RT_IDP') {
-    var log = new parsers.RTIDPLogObject(string);
-    log.parseLog();
-  };
-  //return object;
-};
+  logParser.on('newLog',function(data){
+    var self = this;
+    db.collection('logs', function(err, collection) {
+      collection.insert(self);
+    });
+  });
+  
+});
+
+server.bind(listenPort);
