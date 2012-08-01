@@ -170,21 +170,6 @@ RTFlowLogObject.prototype = {
     };
     self.emit('newLog', {log:self});
     //this.saveToMongo();
-  },
-  saveToMongo: function() {
-    var self = this;
-    var db = new Db('logger', new Server('localhost', 27017, {}));
-    db.open(function(err, result) {
-      db.collection('logs', function(err, collection) {
-        collection.insert(self, function(err, docs) {
-          if (err) {
-            console.log(err);
-          } else {
-            db.close();
-          };
-        });
-      });
-    });
   }
 };
 
@@ -368,20 +353,5 @@ RTIDPLogObject.prototype = {
     };
     //this.saveToMongo();
     self.emit('newLog', {log:self});
-  },
-  saveToMongo: function() {
-    var self = this;
-    var db = new Db('logger', new Server('localhost', 27017, {}));
-    db.open(function(err, result) {
-      db.collection('logs', function(err, collection) {
-        collection.insert(self, function(err, docs) {
-          if (err) {
-            console.log(err);
-          } else {
-            db.close();
-          };
-        });
-      });
-    });
   }
 };
