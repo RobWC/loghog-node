@@ -33,5 +33,5 @@ LogParser.prototype.parse = function(msg) {
       self.emit('save',data);
     });
   };
-  //return object;
+  
 };

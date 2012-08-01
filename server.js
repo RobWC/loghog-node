@@ -4,14 +4,17 @@ var Db = require("mongodb").Db;
 var Connection = require("mongodb").Connection;
 var Server = require("mongodb").Server;
 
-var logParser = new require('./logparser.js').LogParser();
- var db = new Db('logger', new Server('localhost', 27017, {}));
+var logParser = require('./logparser.js').LogParser;
+
+var parser = new logParser();
+
+var db = new Db('logger', new Server('localhost', 27017, {}));
 var listenPort = 1234;
 
 var server = dgram.createSocket("udp4");
 
 server.on("message", function(msg, rinfo) {
-  logParser.parse(msg);
+  parser.parse(msg);
 });
 
 server.on("listening", function() {
@@ -21,7 +24,7 @@ server.on("listening", function() {
 
 db.open(function(err, result) {
 
-  logParser.on('newLog',function(data){
+  parser.on('newLog',function(data){
     var self = this;
     db.collection('logs', function(err, collection) {
       collection.insert(self);
