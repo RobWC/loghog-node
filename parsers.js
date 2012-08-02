@@ -62,8 +62,7 @@ util.inherits(RTFlowLogObject,events.EventEmitter);
 
 exports.RTFlowLogObject = RTFlowLogObject;
 
-RTFlowLogObject.prototype = {
-  parseLog: function() {
+RTFlowLogObject.prototype.parseLog = function() {
     var self = this;
     
     var entries = this.message.split(" ");
@@ -168,7 +167,7 @@ RTFlowLogObject.prototype = {
         }
       };
     };
-    this.emit('newLog', {'log':self});
+    self.emit('newLog', {'log':self});
     //this.saveToMongo();
   }
 };
@@ -238,8 +237,7 @@ util.inherits(RTIDPLogObject,events.EventEmitter);
 
 exports.RTIDPLogObject = RTIDPLogObject;
 
-RTIDPLogObject.prototype = {
-  parseLog: function() {
+RTIDPLogObject.prototype.parseLog = function() {
     var self = this;
     
     var entries = this.message.split(" ");
@@ -354,6 +352,6 @@ RTIDPLogObject.prototype = {
       };
     };
     //this.saveToMongo();
-    this.emit('newLog', {'log':self});
+    self.emit('newLog', {'log':self});
   }
 };
