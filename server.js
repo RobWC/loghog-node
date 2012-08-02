@@ -24,6 +24,7 @@ server.on("listening", function() {
 parser.on('save',function(data){
   console.log(data);
 });
+
 db.open(function(err, result) {
   console.log(result);
   parser.on('save',function(data){
