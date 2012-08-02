@@ -14,6 +14,8 @@ exports.LogParser = LogParser;
 LogParser.prototype.parse = function(msg) {
   var self = this;
   
+  self.emit('test', 'hello');
+  
   var string = msg.toString('utf8');
   var fields = string.split(" ");
   var datetime = fields[1],

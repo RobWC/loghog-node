@@ -21,6 +21,10 @@ server.on("listening", function() {
   console.log("server listening " + address.address + ":" + address.port);
 });
 
+parser.on('test',function(data){
+  console.log(data);
+});
+
 parser.on('save',function(data){
   console.log(data);
 });
