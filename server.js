@@ -27,7 +27,7 @@ db.open(function(err, result) {
   parser.on('newLog',function(data){
     var self = this;
     db.collection('logs', function(err, collection) {
-      collection.insert(self);
+      collection.insert(data.log);
     });
   });
   
