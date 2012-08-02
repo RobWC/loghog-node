@@ -22,7 +22,6 @@ LogParser.prototype.parse = function(msg) {
       subType = fields[5];
   if (type == 'RT_FLOW') {
     var log = new parsers.RTFlowLogObject(string);
-    console.log(log.parseLog());
     self.emit('save',JSON.stringify(log.parseLog()));
   } else if (type == 'RT_IDP') {
     var log = new parsers.RTIDPLogObject(string);
