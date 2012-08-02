@@ -25,9 +25,9 @@ server.on("listening", function() {
 db.open(function(err, result) {
 
   parser.on('save',function(data){
-    console.log(data.log);
+    console.log(data);
     db.collection('logs', function(err, collection) {
-      collection.insert(data.log);
+      collection.insert(data);
     });
   });
   

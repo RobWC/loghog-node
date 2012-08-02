@@ -166,9 +166,7 @@ RTFlowLogObject.prototype.parseLog = function() {
       }
     };
   };
-  self.emit('newLog', {
-    'log': self
-  });
+  return self;
   //this.saveToMongo();
 }
 
@@ -352,7 +350,5 @@ RTIDPLogObject.prototype.parseLog = function() {
     };
   };
   //this.saveToMongo();
-  self.emit('newLog', {
-    'log': self
-  });
+  return self;
 }
