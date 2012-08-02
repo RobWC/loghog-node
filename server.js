@@ -24,7 +24,7 @@ server.on("listening", function() {
 
 db.open(function(err, result) {
 
-  parser.on('newLog',function(data){
+  parser.on('save',function(data){
     console.log(data.log);
     db.collection('logs', function(err, collection) {
       collection.insert(data.log);
