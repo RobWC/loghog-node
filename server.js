@@ -23,7 +23,7 @@ server.on("listening", function() {
 });
 
 db.open(function(err, result) {
-
+  console.log(result);
   parser.on('save',function(data){
     console.log(data);
     db.collection('logs', function(err, collection) {
