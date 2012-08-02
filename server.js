@@ -18,17 +18,7 @@ db.open(function(err, result) {
       collection.insert(data);
     });
   });
-  
 });
-
-parser.on('test',function(data){
-  console.log(data);
-});
-
-parser.on('save',function(data){
-  console.log(data);
-});
-
 
 var server = dgram.createSocket("udp4");
 
