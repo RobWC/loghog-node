@@ -11,9 +11,7 @@ var db = new Db('logger', new Server('localhost', 27017, {}));
 var listenPort = 1234;
 
 db.open(function(err, result) {
-  console.log(result);
   parser.on('save',function(data){
-    console.log(data);
     db.collection('logs', function(err, collection) {
       collection.insert(data);
     });
