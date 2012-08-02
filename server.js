@@ -3,7 +3,6 @@ var dgram = require("dgram");
 var Db = require("mongodb").Db;
 var Connection = require("mongodb").Connection;
 var Server = require("mongodb").Server;
-
 var logParser = require('./logparser.js').LogParser;
 
 var parser = new logParser();
@@ -22,6 +21,9 @@ server.on("listening", function() {
   console.log("server listening " + address.address + ":" + address.port);
 });
 
+parser.on('save',function(data){
+  console.log(data);
+});
 db.open(function(err, result) {
   console.log(result);
   parser.on('save',function(data){
