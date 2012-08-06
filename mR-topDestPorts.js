@@ -4,25 +4,15 @@ var Db = require('mongodb').Db,
 
 var mapFunc = function() {
   subType = this.log.subType;
-  sourceAddress = this.source.address;
-  destAddr = this.destination.address;
   destPort = this.destination.port;
-  destProtocol = this.protocol.id;
-  ipNumArray = sourceAddress.split('.')
-  if (subType == 'RT_FLOW_SESSION_DENY') {
-    if ( !! sourceAddress && !! destPort && !! destProtocol) {
-      ipnum = parseInt((16777216 * parseInt(ipNumArray[0])) + (65536 * parseInt(ipNumArray[1])) + (256 * parseInt(ipNumArray[2])) + parseInt(ipNumArray[3]));
-      if (ipnum >= 167772160 && ipnum <= 184549375) {
-        //10.x.x.x ignore
-      } else {
+    destProtocol = this.protocol.id;
+  if (subType != 'APPTRACK_SESSION_VOL_UPDATE') {
+    if (!! destPort) {
         emit({
-          'srcAddr': sourceAddress,
-          'dstAddr': destAddr,
           'destPort': destPort,
           'destProto': destProtocol
         }, 1);
       }
-    }
   } else {
     //skip
   }
@@ -45,7 +35,7 @@ db.open(function(err, db) {
   db.collection('logs', function(err, collection) {
     collection.mapReduce(mapFunc, reduceFunc, {
       out: {
-        replace: 'topSourceAdressDestPort'
+        replace: 'topDestPort'
       },
       verbose: true
     }, function(err, collection, stats) {
